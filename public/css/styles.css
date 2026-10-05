@@ -573,8 +573,6 @@ ul {
   animation: fadeInUp 0.6s 0.5s ease both;
 }
 
-.hero-stat-item {}
-
 .hero-stat-num {
   font-family: var(--font-display);
   font-size: 1.8rem;

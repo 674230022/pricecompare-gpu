@@ -1,12 +1,24 @@
+# Dependencies
 node_modules/
-.env
-.env.*
-!.env.example
 
+# Environment Variables (ห้าม commit ขึ้น Git)
+.env
+
+# Playwright browser binaries
+.playwright/
+
+# Logs
 logs/
 *.log
 
+# OS files
 .DS_Store
 Thumbs.db
+# Build output
+PriceCompareGPU.exe
 
-.vscode/
+# Portable MariaDB runtime/data
+portable-db/
+
+# Database dump
+price_compare_db.sql
