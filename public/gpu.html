@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>ค้นหา GPU — PriceCompare GPU</title>
+
+  <meta
+    name="description"
+    content="ค้นหาและเปรียบเทียบราคา GPU ทุกรุ่น RTX 5070, RTX 5080, RX 9070 จาก JIB, BaNANA, iHAVECPU"
+  />
+
+  <link
+    rel="stylesheet"
+    href="css/styles.css"
+  />
+
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>"
+  />
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================================
+       NAVBAR
+       ========================================================= -->
+
+  <nav
+    class="navbar"
+    id="navbar"
+  >
+
+    <div class="container">
+
+
+      <a
+        href="index.html"
+        class="nav-logo"
+      >
+
+        <div class="logo-icon">
+          🎮
+        </div>
+
+        <span class="logo-text">
+
+          PriceCompare
+          <span>GPU</span>
+
+        </span>
+
+      </a>
+
+
+      <ul
+        class="nav-links"
+        id="navLinks"
+      >
+
+        <li>
+          <a href="index.html">
+            หน้าแรก
+          </a>
+        </li>
+
+
+        <li>
+          <a
+            href="gpu.html"
+            class="active"
+          >
+            GPU ทั้งหมด
+          </a>
+        </li>
+
+
+        <li>
+          <a href="compare.html">
+            เปรียบเทียบ
+          </a>
+        </li>
+
+
+        <li>
+          <a href="history.html">
+            ประวัติราคา
+          </a>
+        </li>
+
+
+        <li>
+          <a href="admin.html">
+            Admin
+          </a>
+        </li>
+
+      </ul>
+
+
+      <div class="nav-right">
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle menu"
+        >
+
+          <span></span>
+          <span></span>
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+
+  <!-- =========================================================
+       PAGE HEADER
+       ========================================================= -->
+
+  <div
+    style="
+      padding: 100px 0 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border);
+    "
+  >
+
+    <div
+      class="container"
+      style="padding-bottom: 32px;"
+    >
+
+
+      <div style="margin-bottom: 24px;">
+
+        <span class="badge badge-primary">
+          🖥️ GPU
+        </span>
+
+      </div>
+
+
+      <h1
+        style="
+          font-family: var(--font-display);
+          font-size: 2rem;
+          font-weight: 700;
+          margin-bottom: 8px;
+        "
+      >
+
+        ค้นหา
+        <span class="gradient-text">
+          GPU
+        </span>
+        ทั้งหมด
+
+      </h1>
+
+
+      <p style="color: var(--text-secondary);">
+
+        เปรียบเทียบราคาจาก
+        JIB · BaNANA · iHAVECPU
+
+      </p>
+
+
+
+      <!-- =====================================================
+           SEARCH
+           ===================================================== -->
+
+      <div
+        style="
+          margin-top: 24px;
+          max-width: 620px;
+        "
+      >
+
+        <form
+          class="search-box"
+          id="searchForm"
+        >
+
+          <div class="search-icon">
+            🔍
+          </div>
+
+
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="พิมพ์ชื่อ GPU เช่น RTX 5070, RX 9070..."
+            autocomplete="off"
+          />
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="
+              margin: 6px;
+              border-radius: 14px;
+            "
+          >
+
+            ค้นหา
+
+          </button>
+
+        </form>
+
+
+
+        <!-- QUICK TAGS -->
+
+        <div
+          class="quick-tags"
+          style="margin-top: 12px;"
+        >
+
+          <span
+            class="quick-tag"
+            data-q="RTX 5070"
+          >
+            RTX 5070
+          </span>
+
+
+          <span
+            class="quick-tag"
+            data-q="RTX 5080"
+          >
+            RTX 5080
+          </span>
+
+
+          <span
+            class="quick-tag"
+            data-q="RTX 4060"
+          >
+            RTX 4060
+          </span>
+
+
+          <span
+            class="quick-tag"
+            data-q="RTX 4070"
+          >
+            RTX 4070
+          </span>
+
+
+          <span
+            class="quick-tag"
+            data-q="RX 9070"
+          >
+            RX 9070
+          </span>
+
+
+          <span
+            class="quick-tag"
+            data-q="RX 7800 XT"
+          >
+            RX 7800 XT
+          </span>
+
+
+          <span
+            class="quick-tag"
+            data-q="RX 7600"
+          >
+            RX 7600
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       MAIN CONTENT
+       ========================================================= -->
+
+  <section class="section">
+
+    <div class="container">
+
+
+      <!-- FILTER + SORT -->
+
+      <div class="filters-bar">
+
+
+        <span class="filter-label">
+          แบรนด์:
+        </span>
+
+
+        <div
+          class="filter-chips"
+          id="brandFilters"
+        >
+
+          <button
+            class="filter-chip active"
+            data-brand=""
+          >
+            ทั้งหมด
+          </button>
+
+
+          <button
+            class="filter-chip"
+            data-brand="ASUS"
+          >
+            ASUS
+          </button>
+
+
+          <button
+            class="filter-chip"
+            data-brand="MSI"
+          >
+            MSI
+          </button>
+
+
+          <button
+            class="filter-chip"
+            data-brand="GIGABYTE"
+          >
+            GIGABYTE
+          </button>
+
+
+          <button
+            class="filter-chip"
+            data-brand="SAPPHIRE"
+          >
+            SAPPHIRE
+          </button>
+
+
+          <button
+            class="filter-chip"
+            data-brand="POWERCOLOR"
+          >
+            POWERCOLOR
+          </button>
+
+
+          <button
+            class="filter-chip"
+            data-brand="ZOTAC"
+          >
+            ZOTAC
+          </button>
+
+        </div>
+
+
+        <select
+          class="sort-select"
+          id="sortSelect"
+        >
+
+          <option value="lowest_price">
+            ราคาต่ำสุด ↑
+          </option>
+
+          <option value="highest_price">
+            ราคาสูงสุด ↓
+          </option>
+
+          <option value="name">
+            ชื่อ A-Z
+          </option>
+
+          <option value="updated">
+            อัปเดตล่าสุด
+          </option>
+
+        </select>
+
+      </div>
+
+
+
+      <!-- RESULT COUNT -->
+
+      <div
+        class="results-count"
+        id="resultsCount"
+      >
+
+        <span id="searchStatus"></span>
+
+      </div>
+
+
+
+      <!-- =====================================================
+           GPU GRID
+           ===================================================== -->
+
+      <div
+        class="gpu-grid"
+        id="gpuGrid"
+      >
+
+
+        <!-- SKELETON 1 -->
+
+        <div class="skeleton-card">
+
+          <div
+            class="skeleton-img skeleton-line"
+          ></div>
+
+
+          <div class="skeleton-body">
+
+            <div
+              class="skeleton-line short"
+            ></div>
+
+            <div
+              class="skeleton-line medium"
+            ></div>
+
+            <div
+              class="skeleton-line"
+            ></div>
+
+            <div
+              class="skeleton-line price"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- SKELETON 2 -->
+
+        <div class="skeleton-card">
+
+          <div
+            class="skeleton-img skeleton-line"
+          ></div>
+
+
+          <div class="skeleton-body">
+
+            <div
+              class="skeleton-line short"
+            ></div>
+
+            <div
+              class="skeleton-line medium"
+            ></div>
+
+            <div
+              class="skeleton-line"
+            ></div>
+
+            <div
+              class="skeleton-line price"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- SKELETON 3 -->
+
+        <div class="skeleton-card">
+
+          <div
+            class="skeleton-img skeleton-line"
+          ></div>
+
+
+          <div class="skeleton-body">
+
+            <div
+              class="skeleton-line short"
+            ></div>
+
+            <div
+              class="skeleton-line medium"
+            ></div>
+
+            <div
+              class="skeleton-line"
+            ></div>
+
+            <div
+              class="skeleton-line price"
+            ></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- PAGINATION -->
+
+      <div
+        id="pagination"
+        style="
+          display:flex;
+          justify-content:center;
+          gap:8px;
+          margin-top:40px;
+        "
+      ></div>
+
+
+    </div>
+
+  </section>
+
+
+
+  <!-- =========================================================
+       GPU DETAIL MODAL
+       ========================================================= -->
+
+  <div
+    id="gpuModal"
+    class="modal-overlay hidden"
+  >
+
+    <div
+      class="modal-box"
+      id="gpuModalBox"
+    >
+
+      <button
+        class="modal-close"
+        id="modalClose"
+        type="button"
+      >
+        ✕
+      </button>
+
+
+      <div id="modalContent">
+        Loading...
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =========================================================
+       MODAL STYLE
+       THEME เดิม
+       ========================================================= -->
+
+  <style>
+
+    .modal-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background: rgba(0,0,0,0.8);
+
+      backdrop-filter: blur(8px);
+
+      z-index: 2000;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+      animation: fadeIn 0.2s ease;
+
+    }
+
+
+    .modal-overlay:not(.hidden) {
+
+      display: flex;
+
+    }
+
+
+    .modal-overlay.hidden {
+
+      display: none !important;
+
+    }
+
+
+    .modal-box {
+
+      background: var(--bg-card);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-xl);
+
+      max-width: 800px;
+
+      width: 100%;
+
+      max-height: 90vh;
+
+      overflow-y: auto;
+
+      position: relative;
+
+      animation: fadeInUp 0.3s ease;
+
+    }
+
+
+    .modal-close {
+
+      position: absolute;
+
+      top: 16px;
+
+      right: 16px;
+
+      width: 32px;
+
+      height: 32px;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,0.08);
+
+      color: var(--text-secondary);
+
+      font-size: 0.9rem;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      z-index: 1;
+
+      transition: var(--transition);
+
+      border: none;
+
+      cursor: pointer;
+
+    }
+
+
+    .modal-close:hover {
+
+      background: var(--red);
+
+      color: #fff;
+
+    }
+
+
+    .modal-header {
+
+      padding: 24px 24px 0;
+
+      display: flex;
+
+      gap: 24px;
+
+    }
+
+
+    .modal-img {
+
+      width: 200px;
+
+      height: 160px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0d1020,
+          #111827
+        );
+
+      border-radius: var(--radius-lg);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-shrink: 0;
+
+    }
+
+
+    .modal-img img {
+
+      max-height: 130px;
+
+      max-width: 180px;
+
+      object-fit: contain;
+
+    }
+
+
+    .modal-info {
+
+      flex: 1;
+
+    }
+
+
+    .modal-info .brand {
+
+      font-size: .75rem;
+
+      font-weight: 600;
+
+      color: var(--text-muted);
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 6px;
+
+    }
+
+
+    .modal-info h2 {
+
+      font-family: var(--font-display);
+
+      font-size: 1.3rem;
+
+      font-weight: 700;
+
+      margin-bottom: 12px;
+
+    }
+
+
+    .modal-specs {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 16px;
+
+    }
+
+
+    .modal-body {
+
+      padding: 24px;
+
+    }
+
+
+    .modal-prices-title {
+
+      font-weight: 600;
+
+      margin-bottom: 16px;
+
+      font-size: .9rem;
+
+      color: var(--text-secondary);
+
+    }
+
+
+    .store-price-row {
+
+      display: flex;
+
+      align-items: center;
+
+      padding: 14px 16px;
+
+      background: var(--bg-surface);
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-md);
+
+      margin-bottom: 10px;
+
+      transition: var(--transition);
+
+    }
+
+
+    .store-price-row:hover {
+
+      border-color: var(--border-hover);
+
+      background: var(--bg-card-hover);
+
+    }
+
+
+    .store-price-row.lowest {
+
+      border-color: var(--green);
+
+      background:
+        rgba(0,230,118,.05);
+
+    }
+
+
+    .store-name-col {
+
+      flex: 1;
+
+    }
+
+
+    .store-name-label {
+
+      font-weight: 600;
+
+      font-size: .95rem;
+
+    }
+
+
+    .store-avail {
+
+      font-size: .75rem;
+
+      color: var(--text-muted);
+
+      margin-top: 2px;
+
+    }
+
+
+    .store-price-col {
+
+      text-align: right;
+
+    }
+
+
+    .store-price-num {
+
+      font-family: var(--font-display);
+
+      font-size: 1.2rem;
+
+      font-weight: 700;
+
+    }
+
+
+    .store-price-diff {
+
+      font-size: .72rem;
+
+      color: var(--text-muted);
+
+      margin-top: 2px;
+
+    }
+
+
+    .store-btn-col {
+
+      margin-left: 16px;
+
+    }
+
+
+    .modal-footer {
+
+      padding: 0 24px 24px;
+
+      display: flex;
+
+      gap: 12px;
+
+      justify-content: flex-end;
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .modal-header {
+
+        flex-direction: column;
+
+      }
+
+
+      .modal-img {
+
+        width: 100%;
+
+      }
+
+
+      .store-price-row {
+
+        flex-wrap: wrap;
+
+      }
+
+    }
+
+  </style>
+
+
+
+  <!-- =========================================================
+       SCROLL TOP
+       ========================================================= -->
+
+  <button
+    class="scroll-top"
+    id="scrollTop"
+    aria-label="Scroll to top"
+  >
+    ↑
+  </button>
+
+
+  <div
+    class="toast-container"
+    id="toastContainer"
+  ></div>
+
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+
+  <script src="js/gpu.js"></script>
+
+
+</body>
+
+</html>

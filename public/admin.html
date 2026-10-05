@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Dashboard — PriceCompare GPU</title>
+
+  <meta
+    name="description"
+    content="Admin Dashboard สำหรับตรวจสอบสถานะระบบ Scraper และจัดการข้อมูล GPU"
+  />
+
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>"
+  />
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+
+    <div class="container">
+
+      <a href="index.html" class="nav-logo">
+
+        <div class="logo-icon">🎮</div>
+
+        <span class="logo-text">
+          PriceCompare <span>GPU</span>
+        </span>
+
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+
+        <li>
+          <a href="index.html">หน้าแรก</a>
+        </li>
+
+        <li>
+          <a href="gpu.html">GPU ทั้งหมด</a>
+        </li>
+
+        <li>
+          <a href="compare.html">เปรียบเทียบ</a>
+        </li>
+
+        <li>
+          <a href="history.html">ประวัติราคา</a>
+        </li>
+
+        <li>
+          <a href="admin.html" class="active">Admin</a>
+        </li>
+
+      </ul>
+
+      <div class="nav-right">
+
+        <div class="admin-indicator">
+
+          <span class="dot" id="serverDot"></span>
+
+          <span id="serverStatus">
+            กำลังตรวจสอบ...
+          </span>
+
+        </div>
+
+        <button
+          class="nav-toggle"
+          id="navToggle"
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+
+  <!-- PAGE HEADER -->
+  <div class="page-header admin-page-header">
+
+    <div class="container">
+
+      <div
+        style="
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          flex-wrap:wrap;
+          gap:16px;
+        "
+      >
+
+        <div>
+
+          <div style="margin-bottom:10px;">
+
+            <span class="badge badge-orange">
+              ⚙️ Admin
+            </span>
+
+          </div>
+
+          <h1
+            style="
+              font-family:var(--font-display);
+              font-size:2rem;
+              font-weight:700;
+              margin-bottom:6px;
+            "
+          >
+            Admin
+            <span class="gradient-text">
+              Dashboard
+            </span>
+          </h1>
+
+          <p style="color:var(--text-secondary);">
+            ตรวจสอบสถานะระบบ · ควบคุม Scraper · ดูข้อมูลทั้งหมด
+          </p>
+
+        </div>
+
+        <button
+          class="btn btn-primary"
+          id="refreshBtn"
+          onclick="loadAll()"
+        >
+          🔄 รีเฟรช
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="container admin-container">
+
+
+    <!-- ═══════════════════════════════════════════
+         ROW 1: System Status Cards
+    ═══════════════════════════════════════════ -->
+
+    <div class="admin-section">
+
+      <h2 class="admin-section-title">
+        📊 สถิติระบบ
+      </h2>
+
+      <div class="admin-stats-grid">
+
+
+        <div class="admin-stat-card" id="asc-gpu">
+
+          <div
+            class="asc-icon"
+            style="background:var(--primary-glow);"
+          >
+            🖥️
+          </div>
+
+          <div class="asc-content">
+
+            <div
+              class="asc-value gradient-text"
+              id="asc-gpu-num"
+            >
+              —
+            </div>
+
+            <div class="asc-label">
+              GPU ทั้งหมด
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-stat-card" id="asc-price">
+
+          <div
+            class="asc-icon"
+            style="background:var(--green-glow);"
+          >
+            💰
+          </div>
+
+          <div class="asc-content">
+
+            <div
+              class="asc-value"
+              style="color:var(--green)"
+              id="asc-price-num"
+            >
+              —
+            </div>
+
+            <div class="asc-label">
+              รายการราคา
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-stat-card" id="asc-history">
+
+          <div
+            class="asc-icon"
+            style="background:var(--cyan-glow);"
+          >
+            📈
+          </div>
+
+          <div class="asc-content">
+
+            <div
+              class="asc-value"
+              style="color:var(--cyan)"
+              id="asc-history-num"
+            >
+              —
+            </div>
+
+            <div class="asc-label">
+              History Records
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="admin-stat-card" id="asc-uptime">
+
+          <div
+            class="asc-icon"
+            style="background:rgba(249,168,37,.12);"
+          >
+            ⏱️
+          </div>
+
+          <div class="asc-content">
+
+            <div
+              class="asc-value"
+              style="color:var(--orange)"
+              id="asc-uptime-num"
+            >
+              —
+            </div>
+
+            <div class="asc-label">
+              Server Uptime
+            </div>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════
+         ROW 2: Scheduler Status + Scraper Controls
+    ═══════════════════════════════════════════ -->
+
+    <div class="admin-row">
+
+
+      <!-- Scheduler Status -->
+
+      <div class="admin-card">
+
+        <div class="admin-card-header">
+
+          <h3>
+            ⏰ Scheduler Status
+          </h3>
+
+          <div
+            class="scheduler-status-dot"
+            id="schedulerDot"
+          >
+
+            <span class="dot"></span>
+
+            <span id="schedulerLabel">
+              —
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="scheduler-info"
+          id="schedulerInfo"
+        >
+
+          <div class="sched-row">
+
+            <span class="sched-key">
+              รัน Cycle ล่าสุด
+            </span>
+
+            <span
+              class="sched-val"
+              id="sched-lastRun"
+            >
+              —
+            </span>
+
+          </div>
+
+
+          <div class="sched-row">
+
+            <span class="sched-key">
+              สำเร็จล่าสุด
+            </span>
+
+            <span
+              class="sched-val"
+              id="sched-lastSuccess"
+            >
+              —
+            </span>
+
+          </div>
+
+
+          <div class="sched-row">
+
+            <span class="sched-key">
+              Error ล่าสุด
+            </span>
+
+            <span
+              class="sched-val"
+              id="sched-lastError"
+            >
+              —
+            </span>
+
+          </div>
+
+
+          <div class="sched-row">
+
+            <span class="sched-key">
+              ครั้งที่รันทั้งหมด
+            </span>
+
+            <span
+              class="sched-val"
+              id="sched-total"
+            >
+              —
+            </span>
+
+          </div>
+
+
+          <div class="sched-row">
+
+            <span class="sched-key">
+              กำลังทำงาน
+            </span>
+
+            <span
+              class="sched-val"
+              id="sched-running"
+            >
+              —
+            </span>
+
+          </div>
+
+
+          <div class="sched-note">
+
+            ⚙️ เปิด Scheduler:
+            ตั้ง
+            <code>ENABLE_SCHEDULER=true</code>
+            ใน .env
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- Scraper Controls -->
+
+      <div class="admin-card">
+
+        <div class="admin-card-header">
+
+          <h3>
+            🕷️ Scraper Controls
+          </h3>
+
+          <span class="badge badge-primary">
+            Manual
+          </span>
+
+        </div>
+
+
+        <p
+          style="
+            font-size:.85rem;
+            color:var(--text-secondary);
+            margin-bottom:18px;
+          "
+        >
+          กดเพื่อสั่งดึงข้อมูลราคาจากร้านค้า
+          ระบบจะรันใน Background
+        </p>
+
+
+        <div class="scraper-btn-grid">
+
+
+          <!-- JIB -->
+
+          <button
+            class="scraper-btn btn-jib"
+            id="scrape-jib"
+            onclick="triggerScrape('jib')"
+          >
+
+            <span class="s-icon">
+              🏪
+            </span>
+
+            <span class="s-name">
+              JIB
+            </span>
+
+            <span
+              class="s-status"
+              id="ss-jib"
+            >
+              Ready
+            </span>
+
+          </button>
+
+
+          <!-- BaNANA -->
+
+          <button
+            class="scraper-btn btn-banana"
+            id="scrape-banana"
+            onclick="triggerScrape('banana')"
+          >
+
+            <span class="s-icon">
+              🏪
+            </span>
+
+            <span class="s-name">
+              BaNANA
+            </span>
+
+            <span
+              class="s-status"
+              id="ss-banana"
+            >
+              Ready
+            </span>
+
+          </button>
+
+
+          <!-- iHAVECPU -->
+
+          <button
+            class="scraper-btn btn-ihavecpu"
+            id="scrape-ihavecpu"
+            onclick="triggerScrape('ihavecpu')"
+          >
+
+            <span class="s-icon">
+              🏪
+            </span>
+
+            <span class="s-name">
+              iHAVECPU
+            </span>
+
+            <span
+              class="s-status"
+              id="ss-ihavecpu"
+            >
+              Ready
+            </span>
+
+          </button>
+
+
+        </div>
+
+
+        <div style="margin-top:16px;">
+
+          <button
+            class="btn btn-primary"
+            style="width:100%;justify-content:center;"
+            id="scrape-all"
+            onclick="triggerScrape('all')"
+          >
+            🚀 Scrape ทุกร้านพร้อมกัน
+          </button>
+
+        </div>
+
+
+        <div class="scrape-warning">
+
+          ⚠️ Scraper ใช้ Playwright เปิด Browser
+          — อาจใช้เวลา 1-2 นาทีต่อร้าน
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════
+         ROW 3: Store Status
+    ═══════════════════════════════════════════ -->
+
+    <div class="admin-section">
+
+      <h2 class="admin-section-title">
+        🏪 สถานะร้านค้า
+      </h2>
+
+      <div
+        class="stores-status-grid"
+        id="storesStatusGrid"
+      >
+
+        <!-- JS populate -->
+
+        <div
+          class="store-status-card skeleton-card"
+          style="height:100px;"
+        ></div>
+
+        <div
+          class="store-status-card skeleton-card"
+          style="height:100px;"
+        ></div>
+
+        <div
+          class="store-status-card skeleton-card"
+          style="height:100px;"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════
+         ROW 4: Scraper Logs
+    ═══════════════════════════════════════════ -->
+
+    <div class="admin-section">
+
+      <div class="admin-section-header">
+
+        <h2
+          class="admin-section-title"
+          style="margin:0;"
+        >
+          📋 Scraper Logs
+        </h2>
+
+        <div
+          style="
+            display:flex;
+            gap:10px;
+            align-items:center;
+          "
+        >
+
+          <select
+            class="sort-select"
+            id="logFilter"
+            onchange="loadLogs()"
+          >
+
+            <option value="">
+              ทั้งหมด
+            </option>
+
+            <option value="success">
+              ✅ Success
+            </option>
+
+            <option value="error">
+              ❌ Error
+            </option>
+
+            <option value="skipped">
+              ⏭️ Skipped
+            </option>
+
+          </select>
+
+
+          <button
+            class="btn btn-ghost btn-sm"
+            onclick="loadLogs()"
+          >
+            🔄
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="log-table-wrap">
+
+        <table class="log-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                เวลา
+              </th>
+
+              <th>
+                ร้านค้า
+              </th>
+
+              <th>
+                สถานะ
+              </th>
+
+              <th>
+                รายการ
+              </th>
+
+              <th>
+                ข้อความ
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="logTableBody">
+
+            <tr>
+
+              <td
+                colspan="5"
+                style="
+                  text-align:center;
+                  padding:30px;
+                  color:var(--text-muted);
+                "
+              >
+                กำลังโหลด...
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════
+         ROW 5: Price Data Table
+    ═══════════════════════════════════════════ -->
+
+    <div class="admin-section">
+
+      <div class="admin-section-header">
+
+        <h2
+          class="admin-section-title"
+          style="margin:0;"
+        >
+          💰 ราคาล่าสุดทั้งหมด
+        </h2>
+
+        <span
+          id="priceTableInfo"
+          style="
+            font-size:.8rem;
+            color:var(--text-muted);
+          "
+        ></span>
+
+      </div>
+
+
+      <div class="log-table-wrap">
+
+        <table class="log-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                GPU Model
+              </th>
+
+              <th>
+                ชื่อสินค้า
+              </th>
+
+              <th>
+                ร้านค้า
+              </th>
+
+              <th>
+                ราคา
+              </th>
+
+              <th>
+                สถานะ
+              </th>
+
+              <th>
+                อัปเดต
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="priceTableBody">
+
+            <tr>
+
+              <td
+                colspan="6"
+                style="
+                  text-align:center;
+                  padding:30px;
+                  color:var(--text-muted);
+                "
+              >
+                กำลังโหลด...
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+  </div>
+  <!-- /container -->
+
+
+  <button
+    class="scroll-top"
+    id="scrollTop"
+    aria-label="Scroll to top"
+  >
+    ↑
+  </button>
+
+
+  <div
+    class="toast-container"
+    id="toastContainer"
+  ></div>
+
+
+  <!-- Auto-refresh indicator -->
+
+  <div
+    class="auto-refresh-badge"
+    id="autoRefreshBadge"
+  >
+    🔄 Auto-refresh ทุก 30s
+  </div>
+
+
+  <script src="js/admin.js"></script>
+
+</body>
+
+</html>
