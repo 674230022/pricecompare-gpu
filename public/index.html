@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>PriceCompare GPU — เปรียบเทียบราคาการ์ดจอ</title>
 
-  <meta
-    name="description"
-    content="เปรียบเทียบราคาการ์ดจอจาก JIB, BaNANA และ iHAVECPU ในที่เดียว"
-  >
+  <meta name="description" content="เปรียบเทียบราคาการ์ดจอจาก JIB, BaNANA และ iHAVECPU ในที่เดียว">
 
   <link rel="stylesheet" href="css/styles.css">
 
@@ -559,6 +557,7 @@
        --------------------------------------------------------- */
 
     @media (max-width: 1000px) {
+
       .overview-grid,
       .featured-grid {
         grid-template-columns:
@@ -594,6 +593,7 @@
     }
 
     @media (max-width: 520px) {
+
       .overview-grid,
       .featured-grid {
         grid-template-columns: 1fr;
@@ -608,6 +608,206 @@
   </style>
 </head>
 
+<!-- =========================================================
+     PROJECT NOTICE POPUP
+========================================================= -->
+
+<div id="projectNotice" class="project-notice-overlay">
+
+    <div class="project-notice-modal">
+
+        <div class="project-notice-icon">
+            ⚠️
+        </div>
+
+        <h2>ประกาศ</h2>
+
+        <p>
+            เว็บไซต์ <strong>PriceCompare</strong> นี้จัดทำขึ้นเพื่อการศึกษา
+            และใช้สำหรับการส่งงานอาจารย์เท่านั้น
+        </p>
+
+        <p>
+            ระบบมีหน้าที่เปรียบเทียบข้อมูลสินค้าและราคา
+            และไม่มีการสั่งซื้อหรือชำระเงินภายในเว็บไซต์
+        </p>
+
+        <p>
+            หากกด <strong>“ดูสินค้า”</strong>
+            ระบบจะนำไปยังเว็บไซต์ของร้านค้าโดยตรง
+        </p>
+
+        <button id="closeProjectNotice" class="project-notice-btn">
+            รับทราบ
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     PROJECT NOTICE CSS
+========================================================= -->
+
+<style>
+
+.project-notice-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    z-index: 99999;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+}
+
+.project-notice-modal {
+    width: 100%;
+    max-width: 560px;
+
+    background: #ffffff;
+
+    border-radius: 18px;
+
+    padding: 32px;
+
+    text-align: center;
+
+    box-sizing: border-box;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.3);
+
+    animation: projectNoticeShow 0.25s ease;
+}
+
+.project-notice-icon {
+    font-size: 46px;
+
+    margin-bottom: 8px;
+}
+
+.project-notice-modal h2 {
+    margin: 0 0 20px;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #222;
+}
+
+.project-notice-modal p {
+    margin: 12px 0;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    color: #555;
+}
+
+.project-notice-modal strong {
+    color: #222;
+
+    font-weight: 700;
+}
+
+.project-notice-btn {
+    margin-top: 20px;
+
+    padding: 12px 36px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: #ffffff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.project-notice-btn:hover {
+    background: #1d4ed8;
+
+    transform: translateY(-1px);
+}
+
+.project-notice-btn:active {
+    transform: translateY(0);
+}
+
+@keyframes projectNoticeShow {
+
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     MAIN JAVASCRIPT
+========================================================= -->
+
+<script>
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const notice = document.getElementById('projectNotice');
+
+    const closeButton =
+        document.getElementById('closeProjectNotice');
+
+
+    // แสดงประกาศทันทีเมื่อเปิดเว็บไซต์
+    if (notice) {
+        notice.style.display = 'flex';
+    }
+
+
+    // ปุ่ม "รับทราบ"
+    if (closeButton) {
+
+        closeButton.addEventListener('click', function () {
+
+            // ปิด Popup
+            notice.style.display = 'none';
+
+        });
+
+    }
+
+});
+
+</script>
 <body class="home">
 
   <!-- ========================================================
@@ -668,18 +868,11 @@
 
       <div class="nav-right">
 
-        <a
-          href="gpu.html"
-          class="btn btn-primary btn-sm"
-        >
+        <a href="gpu.html" class="btn btn-primary btn-sm">
           ค้นหา GPU
         </a>
 
-        <button
-          class="nav-toggle"
-          id="navToggle"
-          aria-label="เปิดเมนู"
-        >
+        <button class="nav-toggle" id="navToggle" aria-label="เปิดเมนู">
           <span></span>
           <span></span>
           <span></span>
@@ -690,7 +883,7 @@
     </div>
 
   </nav>
-
+  
 
   <!-- ========================================================
        HERO
@@ -721,26 +914,16 @@
 
         <div class="home-search">
 
-          <form
-            class="home-search-box"
-            id="heroSearchForm"
-          >
+          <form class="home-search-box" id="heroSearchForm">
 
             <span class="home-search-icon">
               ⌕
             </span>
 
-            <input
-              type="text"
-              id="heroSearchInput"
-              placeholder="ค้นหา RTX 5070, RTX 5080, RX 9070..."
-              autocomplete="off"
-            >
+            <input type="text" id="heroSearchInput" placeholder="ค้นหา RTX 5070, RTX 5080, RX 9070..."
+              autocomplete="off">
 
-            <button
-              type="submit"
-              class="btn btn-primary"
-            >
+            <button type="submit" class="btn btn-primary">
               ค้นหา
             </button>
 
@@ -842,10 +1025,7 @@
             GPU ในระบบ
           </div>
 
-          <div
-            class="overview-card-value primary"
-            id="statGpuCount"
-          >
+          <div class="overview-card-value primary" id="statGpuCount">
             —
           </div>
 
@@ -862,10 +1042,7 @@
             รายการราคา
           </div>
 
-          <div
-            class="overview-card-value green"
-            id="statPriceCount"
-          >
+          <div class="overview-card-value green" id="statPriceCount">
             —
           </div>
 
@@ -882,10 +1059,7 @@
             ร้านค้าที่ติดตาม
           </div>
 
-          <div
-            class="overview-card-value"
-            id="statStoreCount"
-          >
+          <div class="overview-card-value" id="statStoreCount">
             3
           </div>
 
@@ -902,10 +1076,7 @@
             อัปเดตล่าสุด
           </div>
 
-          <div
-            class="overview-card-value"
-            id="statLastUpdate"
-          >
+          <div class="overview-card-value" id="statLastUpdate">
             —
           </div>
 
@@ -944,20 +1115,14 @@
 
         </div>
 
-        <a
-          href="gpu.html"
-          class="featured-link"
-        >
+        <a href="gpu.html" class="featured-link">
           ดู GPU ทั้งหมด →
         </a>
 
       </div>
 
 
-      <div
-        class="featured-grid"
-        id="featuredGrid"
-      >
+      <div class="featured-grid" id="featuredGrid">
 
         <div class="featured-loading">
           กำลังโหลดข้อมูล...
@@ -1069,6 +1234,6 @@
 
 
   <script src="js/app.js"></script>
-
 </body>
+
 </html>

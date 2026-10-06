@@ -1431,3 +1431,112 @@ ul {
   color: #fff;
   border-color: var(--primary);
 }
+/* ═══════════════════════════════════════════
+   PROJECT NOTICE POPUP
+════════════════════════════════════════════ */
+
+.project-notice-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.65);
+
+    padding: 20px;
+
+    animation: noticeFadeIn 0.25s ease;
+}
+
+.project-notice-modal {
+    width: 100%;
+    max-width: 550px;
+
+    background: #ffffff;
+    border-radius: 18px;
+
+    padding: 30px 35px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+
+    animation: noticeScaleIn 0.25s ease;
+}
+
+.project-notice-icon {
+    font-size: 45px;
+    margin-bottom: 8px;
+}
+
+.project-notice-modal h2 {
+    margin: 0 0 20px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #222;
+}
+
+.project-notice-modal p {
+    margin: 12px 0;
+
+    font-size: 16px;
+    line-height: 1.7;
+
+    color: #555;
+}
+
+.project-notice-modal strong {
+    color: #222;
+    font-weight: 700;
+}
+
+.project-notice-btn {
+    margin-top: 20px;
+
+    padding: 12px 35px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.project-notice-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+@keyframes noticeFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes noticeScaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
